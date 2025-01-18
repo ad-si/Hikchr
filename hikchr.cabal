@@ -53,8 +53,8 @@ library
       c2hs
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.10
-    , text >=1.2
+    , bytestring >=0.11.5 && <0.12
+    , text >=2.0.2 && <2.1
   default-language: GHC2021
 
 executable hikchr
@@ -71,9 +71,9 @@ executable hikchr
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.10
+    , bytestring >=0.11.5 && <0.12
     , hikchr
-    , text >=1.2
+    , text >=2.0.2 && <2.1
   default-language: GHC2021
 
 test-suite hikchr-test
@@ -91,8 +91,8 @@ test-suite hikchr-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.10
+    , bytestring >=0.11.5 && <0.12
     , hikchr
     , hspec
-    , text >=1.2
+    , text >=2.0.2 && <2.1
   default-language: GHC2021
