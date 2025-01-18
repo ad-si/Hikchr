@@ -10,7 +10,7 @@ import Hikchr
 
 main :: IO ()
 main = do
-  let pikchrDiagram = """
+  let pikchrScript = """
         arrow right 200% "Markdown" "Source"
         box rad 10px "Markdown" "Formatter" "(markdown.c)" fit
         arrow right 200% "HTML+SVG" "Output"
@@ -18,15 +18,22 @@ main = do
         box same "Pikchr" "Formatter" "(pikchr.c)" fit
       """
 
-  svg <- hikchr
-      { diagram = pikchrDiagram
-      , svgClass = "example"
-      , renderFlags = []
-      , width = Just 500
-      , height = Just 400
-      }
+  svgResult <- hikchrCustom
+      ( HikchrConfig
+          { svgClass = Just "example"
+          , darkMode = False
+          , width = Nothing
+          , height = Nothing
+          }
+      )
+      pikchrScript
 
-  writeFile "example.svg" svg
+  -- Without configuration:
+  -- svgResult <- hikchr pikchrScript
+
+  case svgResult of
+    Left err -> putErrText err
+    Right svg -> writeFile "example.svg" svg
 ```
 
 will generate following SVG:
