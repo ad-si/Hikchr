@@ -3,7 +3,11 @@
 Hikchr is a Haskell wrapper for [Pikchr](https://pikchr.org/),
 a PIC-like markup language for diagrams.
 
-For example, the following Haskell code:
+
+## Library
+
+Install by adding `hikchr` to your `*.cabal` file
+and use the `hikchr` functions to convert Pikchr scripts to SVG:
 
 ```haskell
 import Hikchr
@@ -39,3 +43,23 @@ main = do
 will generate following SVG:
 
 ![](example.svg)
+
+
+## CLI
+
+Install by running `cabal install hikchr` or `stack install hikchr`
+and use the `hikchr` command like this:
+
+```shell
+hikchr graph.pikchr > graph.svg
+
+echo "box \"Hello\"" | hikchr > hello.svg
+
+hikchr --dark-mode graph.pikchr > graph-dark.svg
+
+hikchr --class graph graph.pikchr > graph.svg
+
+hikchr example1.pikchr example2.pikchr \
+| cat "<html><body>" - "</body></html>" \
+> example.html
+```

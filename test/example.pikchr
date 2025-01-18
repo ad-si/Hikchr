@@ -1,0 +1,3 @@
+box "Hello Hikchr!" fit
+move right 200%
+circle radius 50% fill yellow

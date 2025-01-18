@@ -6,6 +6,16 @@ help: makefile
 .PHONY: test
 test:
 	stack test
+	stack run -- test/example.pikchr
+	echo "box \"Hello\"" | stack run
+	stack run -- --dark-mode test/example.pikchr
+	stack run -- --class example test/example.pikchr
+	stack run -- test/example.pikchr test/architecture.pikchr
+
+
+.PHONY: install
+install:
+	stack install
 
 
 .PHONY: docs
