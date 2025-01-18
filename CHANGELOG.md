@@ -7,6 +7,13 @@ and this project adheres to the
 [Haskell Package Versioning Policy](https://pvp.haskell.org/).
 
 
-## Unreleased
+## 2025-01-18 - 0.2.0.0
 
-## 0.1.0.0 - YYYY-MM-DD
+### Added
+
+- `hikchr` CLI command
+
+
+## 2025-01-18 - 0.1.0.0
+
+Initial release.

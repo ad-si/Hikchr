@@ -1,6 +1,6 @@
 cabal-version: 2.2
 name:               hikchr
-version:            0.1.0.0
+version:            0.2.0.0
 synopsis:           Haskell wrapper for Pikchr, a PIC-like markup language for diagrams.
 description:        Please see the README on GitHub at <https://github.com/ad-si/Hikchr#readme>
 category:           Diagram, Svg
