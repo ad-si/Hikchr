@@ -1,14 +1,22 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module Hikchr (hikchr, HikchrConfig(..)) where
+module Hikchr (
+  hikchr,
+  hikchrCustom,
+  HikchrConfig (..),
+  defaultConfig,
+) where
 
 import Data.Text (Text)
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
 
+import Data.ByteString.Char8 qualified as BS
 import Foreign.C.String (CString)
-import qualified Data.ByteString.Char8 as BS
 import Foreign.C.Types (CInt)
+import Foreign.Marshal.Alloc (allocaBytes)
 import Foreign.Ptr (Ptr, nullPtr)
+import Foreign.Storable (peek, sizeOf)
+
 
 #include "pikchr.h"
 
@@ -21,25 +29,49 @@ import Foreign.Ptr (Ptr, nullPtr)
   } -> `CString'  -- ^ SVG markup
 #}
 
-
 data HikchrConfig = HikchrConfig
-      { diagram :: Text
-      , svgClass :: Text
-      , renderFlags :: Int
-      , width :: Maybe Int
-      , height :: Maybe Int
-      }
+  { svgClass :: Maybe Text
+  , darkMode :: Bool
+  , width :: Maybe Int
+  , height :: Maybe Int
+  }
 
 
-hikchr :: HikchrConfig -> IO Text
-hikchr config = do
-  BS.useAsCString (encodeUtf8 config.diagram) $ \diagramStr ->
-    BS.useAsCString (encodeUtf8 config.svgClass) $ \classStr -> do
-      result <- pikchr
-        diagramStr
-        classStr
-        (fromIntegral config.renderFlags)
-        nullPtr  -- width pointer not used
-        nullPtr  -- height pointer not used
-      resultBS <- BS.packCString result
-      return $ decodeUtf8 resultBS
+defaultConfig :: HikchrConfig
+defaultConfig =
+  HikchrConfig
+    { svgClass = Nothing
+    , darkMode = False
+    , width = Nothing
+    , height = Nothing
+    }
+
+
+hikchr :: Text -> IO (Either Text Text)
+hikchr =
+  hikchrCustom defaultConfig
+
+
+withClassMaybe :: Maybe Text -> (CString -> IO a) -> IO a
+withClassMaybe Nothing f = f nullPtr
+withClassMaybe (Just cls) f = BS.useAsCString (encodeUtf8 cls) f
+
+
+hikchrCustom :: HikchrConfig -> Text -> IO (Either Text Text)
+hikchrCustom config pikchrScript = do
+  BS.useAsCString (encodeUtf8 pikchrScript) $ \scriptStr ->
+    withClassMaybe config.svgClass $ \classStrPtr ->
+      allocaBytes (sizeOf (undefined :: CInt)) $ \widthPtr ->
+        allocaBytes (sizeOf (undefined :: CInt)) $ \heightPtr -> do
+          let
+            -- PIKCHR_PLAINTEXT_ERRORS is always set
+            flags = if config.darkMode then 3 else 1
+
+          result <- pikchr scriptStr classStrPtr flags widthPtr heightPtr
+          resCode <- peek widthPtr
+          resultBS <- BS.packCString result
+
+          return $
+            if resCode < 0
+              then Left $ decodeUtf8 resultBS
+              else Right $ decodeUtf8 resultBS
