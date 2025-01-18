@@ -11,12 +11,14 @@ import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
 import Options.Applicative (
   Alternative (many),
+  ParseError (ShowHelpText),
   Parser,
   ParserResult (CompletionInvoked, Failure, Success),
   argument,
   defaultPrefs,
   execParserPure,
   fullDesc,
+  handleParseResult,
   header,
   help,
   helper,
@@ -24,6 +26,7 @@ import Options.Applicative (
   long,
   metavar,
   optional,
+  parserFailure,
   progDesc,
   renderFailure,
   str,
@@ -106,16 +109,32 @@ processFile config continueOnError path = do
 main :: IO ()
 main = do
   args <- getArgs
-  case parseArgs args of
-    Left err -> do
-      hPutStrLn stderr $ "Error: " ++ err
-      hPutStrLn stderr "Usage: hikchr [--dark-mode] [--class NAME] [--dont-stop] [FILE...]"
-      exitFailure
-    Right CliConfig{..} -> do
-      let config =
-            defaultConfig
-              { Hikchr.darkMode = darkMode
-              , Hikchr.svgClass = svgClass
-              }
-      results <- mapM (processFile config continueOnError) inputFiles
-      when (not (and results)) exitFailure
+
+  let opts =
+        info
+          (cliConfigParser <**> helper)
+          ( fullDesc
+              <> progDesc "Render Pikchr files as SVG"
+              <> header "hikchr - A tool for rendering Pikchr files as SVG"
+          )
+
+  if null args
+    then
+      handleParseResult $
+        Failure $
+          parserFailure defaultPrefs opts (ShowHelpText Nothing) []
+    else case parseArgs args of
+      Left err -> do
+        hPutStrLn stderr $ "Error: " ++ err
+        hPutStrLn
+          stderr
+          "Usage: hikchr [--dark-mode] [--class NAME] [--dont-stop] [FILE...]"
+        exitFailure
+      Right CliConfig{..} -> do
+        let config =
+              defaultConfig
+                { Hikchr.darkMode = darkMode
+                , Hikchr.svgClass = svgClass
+                }
+        results <- mapM (processFile config continueOnError) inputFiles
+        when (not (and results)) exitFailure

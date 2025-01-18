@@ -6,6 +6,14 @@ help: makefile
 .PHONY: test
 test:
 	stack test
+
+	if stack run | grep -q "Usage:"; \
+	then \
+		echo "Help message printed successfully."; \
+	else \
+		echo "ERROR: Expected the help message to be printed."; \
+		exit 1; \
+	fi
 	stack run -- test/example.pikchr
 	echo "box \"Hello\"" | stack run
 	stack run -- --dark-mode test/example.pikchr
