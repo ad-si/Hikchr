@@ -6,3 +6,14 @@ help: makefile
 .PHONY: test
 test:
 	stack test
+
+
+.PHONY: docs
+docs:
+	stack haddock --haddock-for-hackage
+
+
+.PHONY: release
+release: docs
+	stack upload .
+	stack upload --documentation .

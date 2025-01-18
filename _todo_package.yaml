@@ -1,3 +1,6 @@
+# Use this instead of `hikchr.cabal` after
+# https://github.com/sol/hpack/issues/596 is fixed.
+
 name: hikchr
 version: 0.1.0.0
 github: ad-si/Hikchr
