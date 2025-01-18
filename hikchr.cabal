@@ -30,7 +30,6 @@ source-repository head
 library
   exposed-modules:
       Hikchr
-      Lib
   other-modules:
       Paths_hikchr
   autogen-modules:
