@@ -1,0 +1,78 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.37.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:               hikchr
+version:            0.1.0.0
+synopsis:           Haskell wrapper for Pikchr, a PIC-like markup language for diagrams.
+description:        Please see the README on GitHub at <https://github.com/ad-si/Hikchr#readme>
+category:           Diagram, Svg
+homepage:           https://github.com/ad-si/Hikchr#readme
+bug-reports:        https://github.com/ad-si/Hikchr/issues
+author:             Adrian Sieber
+maintainer:         mail@adriansieber.com
+copyright:          Adrian Sieber
+license:            BSD-3-Clause
+license-file:       LICENSE
+build-type:         Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+    cbits/pikchr.c
+    cbits/pikchr.h
+
+source-repository head
+  type: git
+  location: https://github.com/ad-si/Hikchr
+
+library
+  exposed-modules:
+      Hikchr
+      Lib
+  other-modules:
+      Paths_hikchr
+  autogen-modules:
+      Paths_hikchr
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  include-dirs:
+      cbits
+  c-sources:
+      cbits/pikchr.c
+  build-tools:
+      c2hs
+  build-depends:
+      base >=4.7 && <5
+  default-language: GHC2021
+
+executable hikchr
+  main-is: Main.hs
+  other-modules:
+      Paths_hikchr
+  autogen-modules:
+      Paths_hikchr
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , hikchr
+  default-language: GHC2021
+
+test-suite hikchr-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_hikchr
+  autogen-modules:
+      Paths_hikchr
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , hikchr
+  default-language: GHC2021

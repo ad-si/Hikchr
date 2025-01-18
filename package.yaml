@@ -1,0 +1,61 @@
+name: hikchr
+version: 0.1.0.0
+github: ad-si/Hikchr
+license: BSD-3-Clause
+author: Adrian Sieber
+maintainer: mail@adriansieber.com
+copyright: Adrian Sieber
+synopsis: Haskell wrapper for Pikchr, a PIC-like markup language for diagrams.
+description: Please see the README on GitHub at <https://github.com/ad-si/Hikchr#readme>
+category: Diagram, Svg
+
+extra-source-files:
+  - README.md
+  - CHANGELOG.md
+  - cbits/pikchr.c
+  - cbits/pikchr.h
+
+language: GHC2021
+
+dependencies:
+  - base >= 4.7 && < 5
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+
+library:
+  source-dirs: src
+  build-tools: c2hs
+  include-dirs: cbits
+  c-sources:
+    - cbits/pikchr.c
+
+executables:
+  hikchr:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - hikchr
+
+tests:
+  hikchr-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - hikchr
