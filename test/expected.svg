@@ -1,0 +1,21 @@
+<svg xmlns='http://www.w3.org/2000/svg' style='font-size:initial;' class="example" viewBox="0 0 423.821 195.84">
+<polygon points="146.16,37.44 134.64,41.76 134.64,33.12" style="fill:rgb(0,0,0)"/>
+<path d="M2.16,37.44L140.4,37.44"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="74.16" y="25.74" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Markdown</text>
+<text x="74.16" y="49.14" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Source</text>
+<path d="M161.16,72.72L258.341,72.72A15 15 0 0 0 273.341 57.72L273.341,17.16A15 15 0 0 0 258.341 2.16L161.16,2.16A15 15 0 0 0 146.16 17.16L146.16,57.72A15 15 0 0 0 161.16 72.72Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="209.75" y="17.28" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Markdown</text>
+<text x="209.75" y="37.44" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Formatter</text>
+<text x="209.75" y="57.6" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">(markdown.c)</text>
+<polygon points="417.341,37.44 405.821,41.76 405.821,33.12" style="fill:rgb(0,0,0)"/>
+<path d="M273.341,37.44L411.581,37.44"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="345.341" y="25.74" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">HTML+SVG</text>
+<text x="345.341" y="49.14" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Output</text>
+<polygon points="209.75,72.72 214.07,84.24 205.43,84.24" style="fill:rgb(0,0,0)"/>
+<polygon points="209.75,123.12 205.43,111.6 214.07,111.6" style="fill:rgb(0,0,0)"/>
+<path d="M209.75,78.48L209.75,117.36"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<path d="M176.136,193.68L243.365,193.68A15 15 0 0 0 258.365 178.68L258.365,138.12A15 15 0 0 0 243.365 123.12L176.136,123.12A15 15 0 0 0 161.136 138.12L161.136,178.68A15 15 0 0 0 176.136 193.68Z"  style="fill:none;stroke-width:2.16;stroke:rgb(0,0,0);" />
+<text x="209.75" y="138.24" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Pikchr</text>
+<text x="209.75" y="158.4" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">Formatter</text>
+<text x="209.75" y="178.56" text-anchor="middle" fill="rgb(0,0,0)" dominant-baseline="central">(pikchr.c)</text>
+</svg>

@@ -37,6 +37,9 @@ library
       Paths_hikchr
   hs-source-dirs:
       src
+  default-extensions:
+      OverloadedRecordDot
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   include-dirs:
       cbits
@@ -46,6 +49,8 @@ library
       c2hs
   build-depends:
       base >=4.7 && <5
+    , bytestring >=0.10
+    , text >=1.2
   default-language: GHC2021
 
 executable hikchr
@@ -56,10 +61,15 @@ executable hikchr
       Paths_hikchr
   hs-source-dirs:
       app
+  default-extensions:
+      OverloadedRecordDot
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring >=0.10
     , hikchr
+    , text >=1.2
   default-language: GHC2021
 
 test-suite hikchr-test
@@ -71,8 +81,14 @@ test-suite hikchr-test
       Paths_hikchr
   hs-source-dirs:
       test
+  default-extensions:
+      OverloadedRecordDot
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring >=0.10
     , hikchr
+    , hspec
+    , text >=1.2
   default-language: GHC2021

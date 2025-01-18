@@ -17,8 +17,14 @@ extra-source-files:
 
 language: GHC2021
 
+default-extensions:
+  - OverloadedRecordDot
+  - OverloadedStrings
+
 dependencies:
   - base >= 4.7 && < 5
+  - bytestring >= 0.10
+  - text >= 1.2
 
 ghc-options:
   - -Wall
@@ -33,7 +39,7 @@ ghc-options:
 
 library:
   source-dirs: src
-  build-tools: c2hs
+  build-tool-depends: c2hs:c2hs
   include-dirs: cbits
   c-sources:
     - cbits/pikchr.c
@@ -59,3 +65,4 @@ tests:
       - -with-rtsopts=-N
     dependencies:
       - hikchr
+      - hspec
