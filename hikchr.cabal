@@ -22,10 +22,11 @@ tested-with:
   , GHC == 9.6.4
   , GHC == 9.4.8
 extra-source-files:
-    README.md
-    CHANGELOG.md
     cbits/pikchr.c
     cbits/pikchr.h
+extra-doc-files:
+    README.md
+    CHANGELOG.md
 
 source-repository head
   type: git

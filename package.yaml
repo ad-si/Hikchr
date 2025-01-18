@@ -9,9 +9,11 @@ synopsis: Haskell wrapper for Pikchr, a PIC-like markup language for diagrams.
 description: Please see the README on GitHub at <https://github.com/ad-si/Hikchr#readme>
 category: Diagram, Svg
 
-extra-source-files:
+extra-doc-files:
   - README.md
   - CHANGELOG.md
+
+extra-source-files:
   - cbits/pikchr.c
   - cbits/pikchr.h
 
