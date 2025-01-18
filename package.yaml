@@ -66,3 +66,8 @@ tests:
     dependencies:
       - hikchr
       - hspec
+
+tested-with:
+  - GHC == 9.8.2
+  - GHC == 9.6.4
+  - GHC == 9.4.8

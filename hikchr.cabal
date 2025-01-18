@@ -17,6 +17,10 @@ copyright:          Adrian Sieber
 license:            BSD-3-Clause
 license-file:       LICENSE
 build-type:         Simple
+tested-with:
+    GHC == 9.8.2
+  , GHC == 9.6.4
+  , GHC == 9.4.8
 extra-source-files:
     README.md
     CHANGELOG.md
