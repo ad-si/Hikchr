@@ -1,16 +1,42 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
+{-# HLINT ignore "Use unless" #-}
 
 module Main (main) where
 
 import Control.Monad (when)
 import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
-import Hikchr (HikchrConfig, defaultConfig, hikchrCustom)
-import Hikchr qualified
+import Options.Applicative (
+  Alternative (many),
+  Parser,
+  ParserResult (CompletionInvoked, Failure, Success),
+  argument,
+  defaultPrefs,
+  execParserPure,
+  fullDesc,
+  header,
+  help,
+  helper,
+  info,
+  long,
+  metavar,
+  optional,
+  progDesc,
+  renderFailure,
+  str,
+  strOption,
+  switch,
+  (<**>),
+ )
 import System.Environment (getArgs)
 import System.Exit (exitFailure)
 import System.IO (hPutStrLn, stderr)
+
+import Hikchr (HikchrConfig, defaultConfig, hikchrCustom)
+import Hikchr qualified
 
 
 data CliConfig = CliConfig
@@ -21,43 +47,41 @@ data CliConfig = CliConfig
   }
 
 
-defaultCliConfig :: CliConfig
-defaultCliConfig =
-  CliConfig
-    { inputFiles = ["-"] -- Default to stdin
-    , darkMode = False
-    , svgClass = Nothing
-    , continueOnError = False
-    }
-
-
 parseArgs :: [String] -> Either String CliConfig
-parseArgs = do
-  let
-    go config [] = Right config
-    go config ("--dark-mode" : rest) =
-      go config{darkMode = True} rest
-    go config ("--class" : cls : rest) =
-      go config{svgClass = Just (T.pack cls)} rest
-    go config ("--dont-stop" : rest) =
-      go config{continueOnError = True} rest
-    go _config (('-' : _) : _) =
-      Left
-        "Unknown option. Valid options:\n\
-        \--dark-mode\n\
-        \--class NAME\n\
-        \--dont-stop"
-    go config (file : rest) =
-      go
-        config
-          { inputFiles =
-              if inputFiles config == ["-"]
-                then [file]
-                else inputFiles config ++ [file]
-          }
-        rest
+parseArgs args = do
+  let opts =
+        info
+          (cliConfigParser <**> helper)
+          ( fullDesc
+              <> progDesc "Process Hikchr files"
+              <> header "hikchr - a tool for processing Hikchr files"
+          )
 
-  go defaultCliConfig
+  case execParserPure defaultPrefs opts args of
+    Success config -> Right config
+    Failure failure -> Left (fst (renderFailure failure "hikchr"))
+    CompletionInvoked _ -> Left "Completion invoked"
+
+
+cliConfigParser :: Parser CliConfig
+cliConfigParser =
+  CliConfig
+    <$> many (argument str (metavar "FILES..."))
+    <*> switch
+      ( long "dark-mode"
+          <> help "Enable dark mode"
+      )
+    <*> optional
+      ( strOption
+          ( long "class"
+              <> metavar "NAME"
+              <> help "SVG class name"
+          )
+      )
+    <*> switch
+      ( long "dont-stop"
+          <> help "Continue on error"
+      )
 
 
 processFile :: HikchrConfig -> Bool -> FilePath -> IO Bool

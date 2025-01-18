@@ -68,6 +68,7 @@ executable hikchr
       base >=4.7 && <5
     , bytestring >=0.11.5 && <0.12
     , hikchr
+    , optparse-applicative
     , text >=2.0.2 && <2.1
   default-language: GHC2021
 
