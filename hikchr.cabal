@@ -1,4 +1,9 @@
 cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.37.0.
+--
+-- see: https://github.com/sol/hpack
+
 name:               hikchr
 version:            0.2.0.0
 synopsis:           Haskell wrapper for Pikchr, a PIC-like markup language for diagrams.
@@ -44,8 +49,7 @@ library
       cbits
   c-sources:
       cbits/pikchr.c
-  build-tool-depends:
-    c2hs:c2hs
+  build-tool-depends: c2hs:c2hs
   build-depends:
       base >=4.7 && <5
     , bytestring >=0.11.5 && <0.12
@@ -68,7 +72,7 @@ executable hikchr
       base >=4.7 && <5
     , bytestring >=0.11.5 && <0.12
     , hikchr
-    , optparse-applicative >= 0.18.1 && < 0.19
+    , optparse-applicative >=0.18.1 && <0.19
     , text >=2.0.2 && <2.1
   default-language: GHC2021
 
