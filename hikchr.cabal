@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.37.0.
+-- This file has been generated from package.yaml by hpack version 0.38.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -35,10 +35,6 @@ source-repository head
 library
   exposed-modules:
       Hikchr
-  other-modules:
-      Paths_hikchr
-  autogen-modules:
-      Paths_hikchr
   hs-source-dirs:
       src
   default-extensions:
@@ -49,7 +45,8 @@ library
       cbits
   c-sources:
       cbits/pikchr.c
-  build-tool-depends: c2hs:c2hs
+  build-tool-depends:
+      c2hs:c2hs
   build-depends:
       base >=4.7 && <5
     , bytestring >=0.11.5 && <0.12
@@ -58,10 +55,6 @@ library
 
 executable hikchr
   main-is: Main.hs
-  other-modules:
-      Paths_hikchr
-  autogen-modules:
-      Paths_hikchr
   hs-source-dirs:
       app
   default-extensions:
@@ -79,10 +72,6 @@ executable hikchr
 test-suite hikchr-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
-  other-modules:
-      Paths_hikchr
-  autogen-modules:
-      Paths_hikchr
   hs-source-dirs:
       test
   default-extensions:

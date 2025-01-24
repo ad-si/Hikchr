@@ -1,3 +1,5 @@
+spec-version: 0.38
+
 name: hikchr
 version: 0.2.0.0
 github: ad-si/Hikchr
@@ -41,15 +43,7 @@ ghc-options:
 
 library:
   source-dirs: src
-
-  verbatim:
-    build-tool-depends: c2hs:c2hs
-
-  # Use this instead of `verbatim` after
-  # https://github.com/sol/hpack/issues/596 is fixed.
-  #
-  # build-tools: c2hs
-
+  build-tools: c2hs
   include-dirs: cbits
   c-sources:
     - cbits/pikchr.c
