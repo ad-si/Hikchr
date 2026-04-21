@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.38.0.
+-- This file has been generated from package.yaml by hpack version 0.39.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -49,8 +49,8 @@ library
       c2hs:c2hs
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.11.5 && <0.12
-    , text >=2.0.2 && <2.1
+    , bytestring >=0.11.5 && <0.13
+    , text >=2.0.2 && <2.2
   default-language: GHC2021
 
 executable hikchr
@@ -63,10 +63,10 @@ executable hikchr
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.11.5 && <0.12
+    , bytestring >=0.11.5 && <0.13
     , hikchr
     , optparse-applicative >=0.18.1 && <0.19
-    , text >=2.0.2 && <2.1
+    , text >=2.0.2 && <2.2
   default-language: GHC2021
 
 test-suite hikchr-test
@@ -80,8 +80,8 @@ test-suite hikchr-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , bytestring >=0.11.5 && <0.12
+    , bytestring >=0.11.5 && <0.13
     , hikchr
     , hspec
-    , text >=2.0.2 && <2.1
+    , text >=2.0.2 && <2.2
   default-language: GHC2021
