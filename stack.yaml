@@ -1,3 +1,5 @@
-snapshot: lts-22.43
+resolver: lts-24.27
+system-ghc: true
+
 packages:
   - .
